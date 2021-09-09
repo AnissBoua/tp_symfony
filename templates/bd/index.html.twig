@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des auteurs{% endblock %}
+
+{% block body %}
+
+<div class="mx-5 my-2 text-decoration-none">
+    <h1>La liste des auteurs</h1>
+
+    {% for auteur in auteurs %}
+    <h3><a class="text-decoration-none" href="{{ path('bd_show', {'id': auteur.id })}}"> {{auteur.auteur}} </a></h2>
+        {% endfor %}
+</div>
+{% endblock %}
