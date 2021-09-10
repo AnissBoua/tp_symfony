@@ -7,8 +7,14 @@
 <div class="mx-5 my-2 text-decoration-none">
     <h1>La liste des auteurs</h1>
 
+    <ul class="list-group list-group-flush">
     {% for auteur in auteurs %}
-    <h3><a class="text-decoration-none" href="{{ path('bd_show', {'id': auteur.id })}}"> {{auteur.auteur}} </a></h2>
-        {% endfor %}
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a class="text-decoration-none" href="{{ path('bd_show', {'id': auteur.id })}}"> {{auteur.auteur}} </a>
+        <span class="badge bg-primary rounded-pill">{{auteur.nblivres}}</span>
+        </li>
+    {% endfor %}
+    </ul>
+    <div class="navigation">{{knp_pagination_render(auteurs)}}</div>
 </div>
+
 {% endblock %}

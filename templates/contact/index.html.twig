@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+
+
+<div>
+   {{form_start(contact_form)}}
+   {{form_row(contact_form.name, {'label': 'Nom d\'utilisateur', 'attr': {'class': 'input-group', 'placeholder': 'Nom d\'utilisateur'}})}}
+   {{form_row(contact_form.from, {'label': 'Adresse email', 'attr': {'class': 'input-group', 'placeholder': 'Votre adresse email'}})}}
+   {{form_row(contact_form.message, {'label': 'Message', 'attr': {'class': 'input-group', 'placeholder': 'Saisissez votre message'}})}}
+
+   <input type="submit" value="Send" class="btn btn-primary">
+   
+   {{form_end(contact_form)}}
+
+</div>
+{% endblock %}

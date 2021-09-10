@@ -6,9 +6,11 @@ use App\Entity\Auteur;
 use App\Entity\Produit;
 use App\Repository\AuteurRepository;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BdController extends AbstractController
 {
@@ -23,10 +25,11 @@ class BdController extends AbstractController
     /**
      * @Route("/auteurs", name="bd")
      */
-    public function auteurs(): Response
+    public function auteurs(AuteurRepository $auteurRepo, PaginatorInterface $paginator, Request $request): Response
     {
-        $auteursRepo = $this->getDoctrine()->getRepository(Auteur::class);
-        $auteurs = $auteursRepo->findAll();
+        $allAuthors = $auteurRepo->findAuteurProduits();
+        
+        $auteurs = $paginator->paginate($allAuthors, $request->query->getInt('page', 1),10);
 
         return $this->render('bd/index.html.twig', [
             'auteurs' => $auteurs,

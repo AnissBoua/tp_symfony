@@ -3,27 +3,26 @@
 {% block title %}Les bandes dessinées de l'auteur{% endblock %}
 
 {% block body %}
-
-{% for produit in produits %}
-
-<article>
-    <h2>{{produit.titre}} </h2>
-    <div>{{produit.heros}} {{' - '}} {{produit.auteur}}
-        <div class="content">
-            {% if produit.refbd in couvertures %}
-            <img src="{{asset('images/')}}{{produit.refbd}}{{'.jpg'}}" alt="{{ produit.refbd }}" class="thumbnail">
+<div class="container">
+  <div class="row">
+    {% for produit in produits %}
+<div class="card m-2" style="width: 15rem;">
+  {% if produit.refbd in couvertures %}
+            <img src="{{asset('images/')}}{{produit.refbd}}{{'.jpg'}}" alt="{{ produit.refbd }}" class="card-img-top">
             {% else %}
-            <img src="{{asset('images/defaut.jpg')}}" alt="aucune couverture" class="thumbnail">
+            <img src="{{asset('images/defaut.jpg')}}" alt="aucune couverture" class="card-img-top">
             {% endif %}
-            <!-- <img src="{{asset('images/')}}{{produit.refbd}}{{'.jpg'}}" alt="{{ produit.refbd }}" class="thumbnail"> -->
-            <p>{{produit.resume}}</p>
-            {{ produit.refbd }}
-            <hr>
-            </img>
-        </div>
-    </div>
-</article>
+  <div class="card-body" style="height: 15rem;">
+    <h5 class="card-title">{{produit.titre}}</h5>
+    <p>{{produit.heros}} {{' - '}} {{produit.auteur}}</p>
+    <p class="card-text h-25 overflow-auto">{{produit.resume}}</p>
+    <p>{{ produit.refbd }}</p>
+  </div>
+</div>
 
 {% endfor %}
+  </div>
+</div>
+
 
 {% endblock %}
